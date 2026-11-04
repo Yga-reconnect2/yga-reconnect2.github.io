@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>YGA & Reconnect</title>
+<meta name="description" content="Bu sana ne hissettiriyor? Birkaç kelimeyle yaz.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="YGA & Reconnect">
+<meta property="og:description" content="Bu sana ne hissettiriyor? Birkaç kelimeyle yaz.">
+<meta property="og:image" content="https://yga-reconnect.vercel.app/kapak.jpg">
+<meta name="theme-color" content="#f3a15a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@500;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+  /* Turuncu Zarf'ın dili: atölye görseli, el yazısı başlık, YGA turuncusu */
+  :root {
+    --zemin: #ffffff;
+    --gri: #f5f5f7;
+    --metin: #1d1d1f;
+    --ikincil: #6e6e73;
+    --cizgi: #d9d9de;
+    --yga: #f26b1d;
+    --yga-parlak: #ff5a12;
+    --koyu: #2a1a0e;
+    --hata: #c62828;
+    --el: "Caveat", "Bradley Hand", cursive;
+    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; background: var(--zemin); color: var(--metin); }
+  body { font-family: var(--sans); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 3px solid var(--yga); outline-offset: 3px; }
+
+  /* Üstte kampanya görseli (yazısı görselin içinde), altta Bilim Seferberliği fotoğrafı */
+  .kapak { background: #f3a15a; }
+  .kapak-kutu { position: relative; max-width: 640px; margin: 0 auto; container-type: inline-size; }
+  .kapak img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+  /* logonun arkasında yumuşak karartma: turuncu YGA gün batımında kaybolmasın */
+  .kapak-kutu::after {
+    content: ""; position: absolute; inset: 0 0 auto auto; width: 70%; height: 30%; pointer-events: none;
+    background: radial-gradient(ellipse at 85% 18%, rgba(45, 22, 10, .55) 0%, rgba(45, 22, 10, .25) 35%, rgba(45, 22, 10, 0) 70%);
+  }
+  /* Bilim Seferberliği fotoğrafındaki logonun aynısı: YGA | Alumni */
+  .logo {
+    position: absolute; top: 5cqw; right: 5.5cqw; display: flex; align-items: center; gap: 2cqw;
+    font-family: "Montserrat", var(--sans); font-size: 5.6cqw; line-height: 1; letter-spacing: -.01em;
+    z-index: 1; filter: drop-shadow(0 1px 4px rgba(30, 14, 6, .5));
+  }
+  .logo b { font-weight: 800; color: var(--yga-parlak); }
+  .logo i { width: max(1px, .35cqw); height: 1.15em; background: var(--yga-parlak); }
+  .logo span { font-weight: 500; color: #fff; }
+  .gorunmez { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .aciklama { margin: 0 0 32px; font-size: 18px; line-height: 1.5; color: var(--metin); }
+  .aciklama b { color: var(--yga); font-weight: 600; }
+  .aciklama p { margin: 0 0 14px; }
+  .aciklama p:last-child { margin-bottom: 0; }
+  .ani { margin: 4px 0; }
+  .ani img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 18px; }
+  .ani figcaption { margin-top: 10px; font-family: var(--el); font-weight: 700; font-size: 26px; line-height: 1.1; color: var(--ikincil); transform: rotate(-1.5deg); transform-origin: left; }
+
+  main {
+    max-width: calc(640px + 48px); margin: 0 auto; /* yazı kenarı kapak görseliyle hizalı */
+    padding-block: 36px 64px;
+    padding-left: max(24px, env(safe-area-inset-left, 0px));
+    padding-right: max(24px, env(safe-area-inset-right, 0px));
+  }
+  form { display: grid; gap: 28px; }
+  .alan { display: grid; gap: 8px; }
+  label { font-family: var(--el); font-weight: 700; font-size: 30px; line-height: 1.05; }
+  label em { font-style: normal; color: var(--yga); }
+  .ipucu { margin: 0; font-size: 14px; color: var(--ikincil); }
+  .ipucu .sayac { font-variant-numeric: tabular-nums; }
+  .ipucu .sayac.fazla { color: var(--hata); }
+  input[type=text], textarea {
+    width: 100%; font: inherit; font-size: 17px; color: var(--metin); background: var(--gri);
+    border: 1.5px solid transparent; border-radius: 14px; padding: 14px 16px;
+    transition: border-color .15s, background .15s;
+  }
+  input[type=text]:focus, textarea:focus { outline: none; border-color: var(--yga); background: #fff; }
+  textarea { min-height: 140px; resize: vertical; }
+  button {
+    font: inherit; font-size: 17px; font-weight: 600; color: #fff; background: var(--yga-parlak);
+    border: 0; border-radius: 999px; height: 56px; padding: 0 28px; cursor: pointer;
+    box-shadow: 0 8px 30px rgba(255,90,18,.3); transition: transform .1s, opacity .15s;
+    justify-self: start; min-width: 200px;
+  }
+  button:active { transform: scale(.98); }
+  button:disabled { opacity: .6; cursor: default; }
+  .hata { margin: 0; color: var(--hata); font-size: 15px; }
+  .tesekkur { display: grid; gap: 12px; padding-block: 12px; }
+  .tesekkur h2 { font-family: var(--el); font-size: 44px; line-height: 1; margin: 0; transform: rotate(-2deg); transform-origin: left; }
+  .tesekkur p { margin: 0; color: var(--ikincil); max-width: 32rem; }
+  .tesekkur .ozet { font-family: var(--el); font-size: 30px; color: var(--yga); }
+  .story { display: grid; gap: 14px; justify-items: start; margin-top: 8px; }
+  .story img { width: min(100%, 320px); height: auto; aspect-ratio: 9 / 16; border-radius: 16px; box-shadow: 0 12px 40px rgba(60, 30, 10, .25); background: var(--gri); }
+  .story button { min-width: 0; }
+  .tekrar { background: none; color: var(--metin); box-shadow: none; border: 1.5px solid var(--cizgi); min-width: 0; height: 48px; font-size: 15px; }
+  footer { text-align: center; font-size: 13px; color: var(--ikincil); padding: 0 24px 32px; }
+
+  @media (min-width: 760px) {
+    label { font-size: 34px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+  <header class="kapak">
+    <h1 class="gorunmez">YGA & Reconnect</h1>
+    <div class="kapak-kutu">
+    <img src="kapak.webp" alt="Turuncu YGA zarfı taşıyan beyaz güvercin, gün batımında Boğaz'ın üzerinde uçuyor. Üzerinde YGA & Reconnect yazıyor." width="1254" height="1254" fetchpriority="high">
+    <div class="logo" aria-label="YGA Alumni"><b>YGA</b><i></i><span>Alumni</span></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="aciklama" id="aciklama">
+      <p>Bu mesaj sana ulaştıysa, yolun bir zamanlar YGA’dan geçti ve aramızda bir gönül bağı var. Belki uzun zamandır görüşmedik. Ama biliyoruz ki YGA’nın çift kanatlı iklimini, bugün nerede olursan ol, yaşamaya ve yaşatmaya devam ediyorsun.</p>
+      <p>İstiyoruz ki yolu YGA’dan geçenler olarak daha sık bir araya gelelim. Birbirimizden öğrenmeye, birbirimizin gelişimine katkı sunmaya ve birlikte fayda yaratmaya devam edelim.</p>
+      <p><b>Reconnect with YGA</b> bu istekten doğdu.</p>
+      <p>Peki, YGA’yla yeniden bir araya gelmek sana ne çağrıştırıyor? İçinden geçeni bizimle paylaşır mısın?</p>
+    </div>
+    <form id="form" novalidate>
+      <div class="alan">
+        <label for="isim">Adın</label>
+        <p class="ipucu">İsteğe bağlı. Boş bırakırsan yanıtın isimsiz kalır.</p>
+        <input type="text" id="isim" name="isim" maxlength="80" autocomplete="name" placeholder="Ad Soyad">
+      </div>
+      <div class="alan">
+        <label for="kelimeler">Sana ne <em>hissettiriyor?</em></label>
+        <p class="ipucu">3-4 kelime yeter. <span class="sayac" id="sayac"></span></p>
+        <input type="text" id="kelimeler" name="kelimeler" maxlength="200" autocomplete="off" placeholder="ör. sıcak, tanıdık, biraz özlem" required>
+      </div>
+      <figure class="ani">
+        <img src="seferberlik.jpg" alt="Bilim Seferberliği atölyesinde çocuklar ve bir gönüllü birlikte devre kuruyor." loading="lazy" width="1920" height="1081">
+        <figcaption>Bilim Seferberliği'nden bir an</figcaption>
+      </figure>
+      <div class="alan">
+        <label for="metin">YGA & Reconnect</label>
+        <p class="ipucu">Bir anı, bir dilek, ya da yeniden bağ kurmak senin için ne demek.</p>
+        <textarea id="metin" name="metin" maxlength="5000" placeholder="İsteğe bağlı"></textarea>
+      </div>
+      <p class="hata" id="hata" role="alert" hidden></p>
+      <button type="submit" id="gonder">Gönder</button>
+    </form>
+
+    <section class="tesekkur" id="tesekkur" hidden>
+      <h2>Teşekkürler!</h2>
+      <p>Yanıtın bize ulaştı. Yazdıkların Reconnect mektubunu birlikte yazarken önümüzde olacak. Kelimelerinle hazırladığımız görseli indirebilirsin.</p>
+      <div class="story" id="story" hidden>
+        <img id="storyImg" alt="Yazdığın kelimelerle hazırlanan YGA & Reconnect story görseli">
+        <button type="button" id="indir">Görseli indir</button>
+      </div>
+      <button type="button" class="tekrar" id="tekrar">Bir yanıt daha gönder</button>
+    </section>
+  </main>
+
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  // vercel.app'te kendi API'si; yedek linkte (github.io) Supabase'deki aynı kaydı yapan fonksiyon
+  const YANIT_API = location.hostname.endsWith("github.io")
+    ? "https://uiauqhayjsxywhlabiid.supabase.co/functions/v1/reconnect-yanit"
+    : "/api/yanit";
+  const form = $("form"), kelimeler = $("kelimeler"), sayac = $("sayac"), hata = $("hata"), gonder = $("gonder");
+
+  function kelimeSayisi() {
+    const s = kelimeler.value.trim();
+    return s ? s.split(/\s+/).length : 0;
+  }
+  kelimeler.addEventListener("input", () => {
+    const n = kelimeSayisi();
+    sayac.textContent = n ? `${n} kelime` : "";
+    sayac.classList.toggle("fazla", n > 20);
+  });
+
+  function goster(msg) { hata.textContent = msg; hata.hidden = !msg; }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    goster("");
+    const n = kelimeSayisi();
+    if (!n) { goster("Birkaç kelime yazman yeterli."); kelimeler.focus(); return; }
+    if (n > 20) { goster("Birkaç kelimeyle anlatman yeterli, uzun düşüncelerini alttaki kutuya yazabilirsin."); kelimeler.focus(); return; }
+    gonder.disabled = true; gonder.textContent = "Gönderiliyor…";
+    try {
+      const r = await fetch(YANIT_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isim: $("isim").value, kelimeler: kelimeler.value, metin: $("metin").value }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.hata || "Yanıt gönderilemedi. Tekrar dener misin?");
+      storyHazirla(kelimeler.value.trim());
+      form.hidden = true; $("tesekkur").hidden = false;
+      $("tesekkur").scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (err) {
+      goster(err.message || "Bağlantı kurulamadı. İnternetini kontrol edip tekrar dene.");
+    } finally {
+      gonder.disabled = false; gonder.textContent = "Gönder";
+    }
+  });
+
+  // Story: arka plan görseli + üstteki boş alanda yalnız yazdığı kelimeler (1080x1920)
+  let storyBlob = null;
+  const arka = new Image(); arka.src = "story.webp";
+  async function storyHazirla(sozler) {
+    storyBlob = null; $("story").hidden = true;
+    try {
+      await Promise.all([
+        arka.decode(),
+        document.fonts.load('700 120px "Caveat"'),
+      ]);
+      const W = 1080, H = 1920, c = document.createElement("canvas");
+      c.width = W; c.height = H;
+      const x = c.getContext("2d");
+      const o = Math.max(W / arka.naturalWidth, H / arka.naturalHeight);
+      const dw = arka.naturalWidth * o, dh = arka.naturalHeight * o;
+      x.drawImage(arka, (W - dw) / 2, (H - dh) / 2, dw, dh);
+
+      // üstteki boş masa alanı (~%20), fotoğrafların üstünde; çevresine yumuşak koyu şerit
+      const orta = H * 0.185, yari = 260;
+      const g = x.createLinearGradient(0, orta - yari, 0, orta + yari);
+      g.addColorStop(0, "rgba(28,14,6,0)");
+      g.addColorStop(0.25, "rgba(28,14,6,.62)");
+      g.addColorStop(0.75, "rgba(28,14,6,.62)");
+      g.addColorStop(1, "rgba(28,14,6,0)");
+      x.fillStyle = g; x.fillRect(0, orta - yari, W, yari * 2);
+
+      x.textAlign = "center"; x.textBaseline = "alphabetic";
+
+      // kelimeler: el yazısı, genişliğe sığacak kadar büyük, gerekirse iki satır
+      const maxW = W - 140;
+      let boy = 190, satirlar;
+      const bol = (metin) => {
+        const k = metin.split(/\s+/), out = []; let cur = "";
+        for (const w of k) { const t = cur ? cur + " " + w : w; if (x.measureText(t).width > maxW && cur) { out.push(cur); cur = w; } else cur = t; }
+        if (cur) out.push(cur); return out;
+      };
+      for (;;) {
+        x.font = `700 ${boy}px "Caveat", cursive`;
+        satirlar = bol(sozler);
+        // uzun yanıtta yazı küçüldükçe daha çok satıra izin ver, hiçbir kelime düşmesin
+        const enCok = boy > 120 ? 2 : boy > 84 ? 3 : 5;
+        if ((satirlar.length <= enCok && satirlar.every((l) => x.measureText(l).width <= maxW)) || boy <= 56) break;
+        boy -= 6;
+      }
+      x.fillStyle = "#ffffff";
+      x.shadowColor = "rgba(0,0,0,.35)"; x.shadowBlur = 12;
+      const ara = boy * 0.95, ilk = orta - ((satirlar.length - 1) * ara) / 2 + boy * 0.3;
+      satirlar.forEach((l, i) => x.fillText(l, W / 2, ilk + i * ara));
+      x.shadowBlur = 0;
+
+      // turuncu el çizgisi
+      const sonY = ilk + (satirlar.length - 1) * ara + 34;
+      const gen = Math.min(maxW, Math.max(...satirlar.map((l) => x.measureText(l).width))) * 0.8;
+      x.strokeStyle = "#f26b1d"; x.lineWidth = 9; x.lineCap = "round";
+      x.beginPath(); x.moveTo(W / 2 - gen / 2, sonY + 6);
+      x.bezierCurveTo(W / 2 - gen / 5, sonY - 8, W / 2 + gen / 5, sonY - 10, W / 2 + gen / 2, sonY - 2);
+      x.stroke();
+
+      storyBlob = await new Promise((r) => c.toBlob(r, "image/jpeg", 0.9));
+      $("storyImg").src = URL.createObjectURL(storyBlob);
+      $("story").hidden = false;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  $("indir").addEventListener("click", async () => {
+    if (!storyBlob) return;
+    const dosya = new File([storyBlob], "yga-reconnect-story.jpg", { type: "image/jpeg" });
+    // Telefonda paylaşım menüsü: "Görüntüyü Kaydet" ya da doğrudan Instagram
+    if (navigator.canShare && navigator.canShare({ files: [dosya] })) {
+      try { await navigator.share({ files: [dosya] }); return; } catch (e) { if (e.name === "AbortError") return; }
+    }
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(storyBlob); a.download = dosya.name;
+    document.body.append(a); a.click(); a.remove();
+  });
+
+  $("tekrar").addEventListener("click", () => {
+    const ad = $("isim").value; form.reset(); $("isim").value = ad; sayac.textContent = "";
+    $("tesekkur").hidden = true; form.hidden = false; kelimeler.focus();
+  });
+</script>
+</body>
+</html>
