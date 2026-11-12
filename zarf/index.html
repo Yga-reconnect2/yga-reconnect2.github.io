@@ -59,14 +59,6 @@
   .oynat { position:absolute; width:80px; height:80px; border-radius:50%; border:0; background:rgba(255,255,255,.2); color:#fff; font-size:30px; cursor:pointer; }
 
 
-  /* 3 · Kapanış (eski /r sayfası): logo, kare kapak, indirme düğmesi */
-  #kapanis { min-height:100dvh; display:flex; flex-direction:column; align-items:center; background:var(--koyu);
-             padding:max(24px,env(safe-area-inset-top)) 24px max(32px,env(safe-area-inset-bottom)); animation:belir .8s ease-out both; }
-  #kapanis .logo { width:100%; max-width:520px; color:#fff; font-size:15px; }
-  #kapanis .kapak { margin-top:20px; width:100%; max-width:520px; aspect-ratio:1; object-fit:cover; border-radius:24px; box-shadow:0 20px 60px rgba(0,0,0,.45); }
-  #kapanis .indir { width:100%; max-width:520px; margin-top:36px; }
-  #kapanis .oku { margin-top:18px; background:none; border:0; color:rgba(255,255,255,.8); text-decoration:underline; font:15px var(--sans); cursor:pointer; }
-
   /* 4 · Mektup (web) */
   #mektup { position:relative; isolation:isolate; min-height:100dvh; padding:48px 16px max(64px,env(safe-area-inset-bottom)); }
   #mektup > img.zemin { position:fixed; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; transform:scale(1.1); filter:blur(24px) brightness(.38); }
@@ -77,7 +69,7 @@
            background-image:linear-gradient(rgba(242,107,29,.05) 1px,transparent 1px); background-size:100% 2.05em; }
   .logo { display:flex; justify-content:flex-end; align-items:center; gap:10px; font:13px Montserrat,sans-serif; }
   .logo b { font-weight:800; color:var(--yga); } .logo i { width:2px; height:18px; background:var(--yga); }
-  .kagit h2 { font:700 44px/1 var(--el); margin:28px 0 36px; display:inline-block; transform:rotate(-2deg); position:relative; }
+  .kagit h2 { font:700 34px/1.1 var(--el); margin:40px 0 18px; }
   .kagit h2 .cizgi { left:4%; width:96%; bottom:-14px; }
   .kagit p { font:400 18px/1.75 Lora,Georgia,serif; margin:0 0 1.1em; }
   .kagit p.vurgu { font:700 30px/1.2 var(--el); color:var(--yga); margin-top:1.4em; }
@@ -85,7 +77,8 @@
   figure button { display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; }
   figure img { display:block; width:100%; border-radius:6px; box-shadow:0 12px 34px rgba(60,30,10,.28); }
   figcaption { font:600 22px var(--el); color:#8a6a55; text-align:center; margin-top:8px; }
-  .kagit > p:first-of-type { font-style:italic; color:#5a4234; font-size:1.06em; }
+  .kagit > p:first-of-type { font-style:italic; color:#5a4234; font-size:19px; }
+  @media (min-width:768px) { .kagit > p:first-of-type { font-size:20.5px; } }
   .simdi { margin:2.2em -10px 0; background:#fff1e4; border-left:4px solid var(--yga); border-radius:0 14px 14px 0; padding:26px 22px 24px; }
   .simdi h3 { margin:0 0 12px; font:700 44px/1 var(--el); color:var(--yga); }
   .simdi p { margin:0; }
@@ -98,6 +91,11 @@
   .kartlar div { background:#fff; border-radius:10px; padding:10px 16px 0; min-height:62px; border-bottom:2px solid #ecdccb; }
   .kartlar small { font:800 11px Montserrat,sans-serif; letter-spacing:.06em; color:var(--yga); }
   @media (min-width:768px) { .simdi { margin:2.4em -32px 0; padding:34px 32px 30px; } .simdi h3 { font-size:54px; } }
+  .kagit .kapak { display:block; width:min(100%,420px); aspect-ratio:1; height:auto; margin:22px auto 0; border-radius:14px; box-shadow:0 14px 40px rgba(60,30,10,.25); }
+  .kagit .ust { text-align:center; margin:30px 0 8px; }
+  .kagit h1 { display:inline-block; position:relative; margin:0; font:700 42px/1 var(--el); transform:rotate(-2deg); }
+  .kagit h1 .cizgi { left:20%; width:60%; bottom:-14px; }
+  @media (min-width:768px) { .kagit h1 { font-size:52px; } }
   .davet { border-left:3px solid var(--yga); padding:6px 0 6px 18px; margin:1.6em 0; }
   .davet p { margin:.2em 0; } .davet b { font-weight:500; color:var(--yga); }
   .kagit p.not { font-style:italic; font-size:15.5px !important; line-height:1.6 !important; color:#7a6656; border-top:1px dashed #d8c8b5; padding-top:1.2em; margin-top:2em !important; }
@@ -107,7 +105,7 @@
            border:1px solid rgba(255,255,255,.7); background:var(--yga-parlak); color:#fff; text-decoration:none; font:600 17px var(--sans);
            box-shadow:0 8px 30px rgba(255,90,18,.35); }
   .tekrar { display:block; margin:18px auto 0; background:none; border:0; color:rgba(255,255,255,.65); text-decoration:underline; font:14px var(--sans); cursor:pointer; }
-  @media (min-width:768px) { .kagit { padding:64px 72px 56px; } .kagit h2 { font-size:58px; } .kagit p { font-size:19.5px; } figure { margin:36px -36px 40px; } }
+  @media (min-width:768px) { .kagit { padding:64px 72px 56px; } .kagit h2 { font-size:40px; } .kagit p { font-size:19.5px; } figure { margin:36px -36px 40px; } }
 
   /* Görseli büyüt */
   #buyuk { position:fixed; inset:0; z-index:60; background:rgba(10,6,3,.94); display:flex; align-items:center; justify-content:center; padding:12px; cursor:zoom-out; }
@@ -144,23 +142,14 @@
   <button id="oynat" class="oynat gizli" type="button" aria-label="Oynat">▶</button>
 </div>
 
-<!-- 3 · Kapanış -->
-<main id="kapanis" class="gizli">
-  <div class="logo"><b>YGA</b><i></i><span>Alumni</span></div>
-  <img class="kapak" src="../kapak.webp" width="1254" height="1254" alt="Turuncu YGA zarfı taşıyan beyaz güvercin, gün batımında Boğaz'ın üzerinde. Üzerinde YGA &amp; Reconnect yazıyor.">
-  <a class="indir" href="mektup.pdf" download="YGA-Reconnect-Mektup.pdf">
-    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 15v3a2 2 0 002 2h10a2 2 0 002-2v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Mektubunu indirmek için tıkla
-  </a>
-  <button class="oku" id="oku" type="button">Mektubu burada oku</button>
-</main>
-
 <!-- 4 · Mektup (web) -->
 <main id="mektup" class="gizli">
   <img class="zemin" src="karsilama.jpg" alt="">
   <article class="kagit">
     <div class="logo"><b>YGA</b><i></i><span>Alumni</span></div>
-    <h2>Biz'den Biz'e bir mektup,<svg class="cizgi" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 110 6, 260 2, 396 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></h2>
+    <img class="kapak" src="../kapak.webp" width="1254" height="1254" alt="Turuncu YGA zarfı taşıyan beyaz güvercin, gün batımında Boğaz'ın üzerinde. Üzerinde YGA &amp; Reconnect yazıyor.">
+    <div class="ust"><h1>Turuncu Zarf'taki Mektup<svg class="cizgi" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 110 6, 260 2, 396 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></h1></div>
+    <h2>Biz'den Biz'e bir mektup,</h2>
 
     <p>Özledik, özleştik. Özümüze, eski güzel YGA günlerimize tekrar dönmeyi; bu içten bağı tekrar hissetmeyi hayal ettik.</p>
 
@@ -201,7 +190,7 @@
 <script>
   const $ = (id) => document.getElementById(id);
   const video = $("video");
-  const goster = (id) => ["karsilama", "hikaye", "kapanis", "mektup"].forEach((k) => $(k).classList.toggle("gizli", k !== id));
+  const goster = (id) => ["karsilama", "hikaye", "mektup"].forEach((k) => $(k).classList.toggle("gizli", k !== id));
 
   function hikayeyiBaslat() {
     goster("hikaye");
@@ -220,8 +209,7 @@
   // Son karede zarf masada kalır; üstü parlar, dokununca mektup açılır
   video.addEventListener("ended", () => { $("sesAc").classList.add("gizli"); $("zarfAc").classList.add("hazir"); });
   video.addEventListener("error", () => mektubuAc());
-  function mektubuAc() { video.pause(); goster("kapanis"); window.scrollTo(0, 0); }
-  $("oku").onclick = () => { goster("mektup"); window.scrollTo(0, 0); };
+  function mektubuAc() { video.pause(); goster("mektup"); window.scrollTo(0, 0); }
   $("zarfAc").onclick = mektubuAc;
   $("tekrar").onclick = hikayeyiBaslat;
 
