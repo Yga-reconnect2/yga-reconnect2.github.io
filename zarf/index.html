@@ -85,9 +85,22 @@
   figure button { display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; }
   figure img { display:block; width:100%; border-radius:6px; box-shadow:0 12px 34px rgba(60,30,10,.28); }
   figcaption { font:600 22px var(--el); color:#8a6a55; text-align:center; margin-top:8px; }
+  .kagit > p:first-of-type { font-style:italic; color:#5a4234; font-size:1.06em; }
+  .simdi { margin:2.2em -10px 0; background:#fff1e4; border-left:4px solid var(--yga); border-radius:0 14px 14px 0; padding:26px 22px 24px; }
+  .simdi h3 { margin:0 0 12px; font:700 44px/1 var(--el); color:var(--yga); }
+  .simdi p { margin:0; }
+  .sehirler { display:flex; gap:3px; margin-top:20px; }
+  .sehirler span { font:700 24px/1 var(--el); color:#fff; background:var(--yga); padding:6px 18px 9px; }
+  .sehirler span:first-child { border-radius:999px 0 0 999px; } .sehirler span:last-child { border-radius:0 999px 999px 0; }
+  .sehirler .koyu { background:var(--koyu); }
+  @media (max-width:420px) { .sehirler span { font-size:20px; padding:5px 12px 8px; } .simdi { padding:22px 16px 20px; } }
+  .kartlar { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
+  .kartlar div { background:#fff; border-radius:10px; padding:10px 16px 0; min-height:62px; border-bottom:2px solid #ecdccb; }
+  .kartlar small { font:800 11px Montserrat,sans-serif; letter-spacing:.06em; color:var(--yga); }
+  @media (min-width:768px) { .simdi { margin:2.4em -32px 0; padding:34px 32px 30px; } .simdi h3 { font-size:54px; } }
   .davet { border-left:3px solid var(--yga); padding:6px 0 6px 18px; margin:1.6em 0; }
   .davet p { margin:.2em 0; } .davet b { font-weight:500; color:var(--yga); }
-  .not { font-size:15.5px !important; line-height:1.6 !important; color:#5d4c40; border-top:1px dashed #d8c8b5; padding-top:1.2em; margin-top:2em !important; }
+  .kagit p.not { font-style:italic; font-size:15.5px !important; line-height:1.6 !important; color:#7a6656; border-top:1px dashed #d8c8b5; padding-top:1.2em; margin-top:2em !important; }
   .imza { display:flex; align-items:center; gap:12px; margin-top:28px; font:22px Montserrat,sans-serif; }
   .imza b { font-weight:800; color:var(--yga); } .imza i { width:2px; height:24px; background:#c9b8a6; }
   .indir { display:flex; align-items:center; justify-content:center; gap:12px; max-width:760px; margin:28px auto 0; height:58px; border-radius:999px;
@@ -111,7 +124,7 @@
       <span>Sana özel</span><br>
       <span>bir mesajımız var.<svg class="cizgi" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 110 6, 260 2, 396 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></span>
     </h1>
-    <p>YGA'da başlayan bir yolculuk, hâlâ birçok hayatın parçası.</p>
+    <p>YGA'da başlayan bir yolculuk, hala birçok hayatın parçası.</p>
   </section>
   <section class="belir" style="animation-delay:.35s">
     <button class="tikla" id="tikla" type="button">
@@ -153,25 +166,23 @@
 
     <p>Bu mektubu yazarken, hep birlikte olduğumuz eski bir günü düşündük: Üzerimizde YGA tişörtleri, herkesin yüzünde aynı içten gülüş. Seanslar, seans aralarında içi kıpır kıpır onlarca YGA'lı. Yan yana, gözleriyle gülüyor birbirlerine. Hepimizin yaşadığı güzel, içten, özden anlar.</p>
 
-    <p>Hâlâ sakladığımız YGA not defterleri, ya da gönlümüze işlediğimiz YGA kavramları. Sandıkları karıştırsak bulacağımız YGA tişörtleri... Hayatımızın birçok alanında bizimle yaşamaya devam eden, bazen sesli bazen sessizce kullandığımız, parçamız haline gelmiş öğretiler.</p>
+    <p>Hala sakladığımız YGA not defterleri, ya da gönlümüze işlediğimiz YGA kavramları. Sandıkları karıştırsak bulacağımız YGA tişörtleri... Hayatımızın birçok alanında bizimle yaşamaya devam eden, bazen sesli bazen sessizce kullandığımız, parçamız haline gelmiş öğretiler.</p>
 
     <figure>
       <button type="button" id="gorselBtn" aria-label="Görseli büyüt"><img src="kavramlar.jpg" alt="YGA kavramlarının yazılı olduğu notlar ve YGA fotoğraflarıyla dolu bir pano" loading="lazy"></button>
-      <figcaption>Hâlâ dilimizde olanlar</figcaption>
+      <figcaption>Hala dilimizde olanlar</figcaption>
     </figure>
 
     <p>YGA'da farklı projelerde, farklı zamanlarda sorumluluklar aldık. Birlikte başardığımız her şey; sonraki dönemlerde de kat üstüne katlar çıkılarak büyümeye devam etti, belki farklı dönemlerde birbirimizi hiç tanımadan aynı fikirlere değer kattık, büyük bir yolculuğun parçası haline geldik.</p>
 
     <p>Sevgide ayrılık da var, uzak düşmek de. Yemen'de olup, gönülden hep bir parça yanında kalmak da.</p>
 
-    <p class="vurgu">Ve şimdi…</p>
-
-    <p>Yeniden bir araya geliyoruz. Reconnect with YGA yolculuğumuzu; İstanbul ve Londra'da fiziki + online katılımlı bir toplantıyla başlatıyoruz.</p>
-
-    <div class="davet">
-      <p><b>Yer:</b> …</p>
-      <p><b>Saat:</b> …</p>
-    </div>
+    <section class="simdi">
+      <h3>Ve şimdi...</h3>
+      <p>Yeniden bir araya geliyoruz. <b>Reconnect with YGA</b> yolculuğumuzu; İstanbul ve Londra'da fiziki + online katılımlı bir toplantıyla başlatıyoruz.</p>
+      <div class="sehirler"><span>İstanbul</span><span>Londra</span><span class="koyu">Online</span></div>
+      <div class="kartlar"><div><small>YER</small><em></em></div><div><small>SAAT</small><em></em></div></div>
+    </section>
 
     <p class="not"><b>Not:</b> Yıllar içinde artık ulaşamadığımız eski mezunlarımız da olduğunu biliyoruz. Sizden ricamız bu daveti tanıdığınız ve mesajın gitmediğini öğrendiğiniz YGA'lılara da ulaştırmanız.</p>
 
