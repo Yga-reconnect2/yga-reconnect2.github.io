@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Turuncu Zarf · YGA Alumni</title>
+<meta name="description" content="Sana özel bir mesajımız var.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Turuncu Zarf · YGA Alumni">
+<meta property="og:description" content="Sana özel bir mesajımız var.">
+<meta property="og:image" content="https://yga-reconnect2.github.io/zarf/karsilama.jpg">
+<meta name="theme-color" content="#2a1a0e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@500;800&display=swap">
+<style>
+  :root { --yga:#f26b1d; --yga-parlak:#ff5a12; --koyu:#2a1a0e; --kagit:#fbf6ec; --murekkep:#2b211b;
+          --el:"Caveat","Bradley Hand",cursive; --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--koyu); color:#fff; font-family:var(--sans); }
+  .gizli { display:none !important; }
+  @keyframes belir { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  .belir { animation:belir .8s ease-out both; }
+
+  /* 1 · Karşılama */
+  #karsilama { position:relative; isolation:isolate; min-height:100dvh; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end;
+               gap:32px; padding:38dvh 24px max(24px,env(safe-area-inset-bottom)); }
+  #karsilama > img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
+  #karsilama::before { content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(to top,rgba(22,12,5,.92) 0%,rgba(22,12,5,.7) 45%,rgba(22,12,5,.05) 75%); }
+  h1.baslik { font:700 44px/.95 var(--el); margin:0; letter-spacing:-.01em; text-shadow:0 2px 10px rgba(0,0,0,.35); }
+  h1.baslik span { display:inline-block; transform:rotate(-3deg); position:relative; }
+  .cizgi { position:absolute; left:10%; bottom:-12px; width:92%; height:16px; color:var(--yga); }
+  #karsilama p { margin:32px 0 0; max-width:24rem; font-size:16px; line-height:1.35; color:rgba(255,255,255,.9); }
+  .tikla { display:inline-flex; align-items:center; gap:12px; border:1px solid rgba(255,255,255,.7); background:rgba(255,255,255,.15);
+           color:#fff; font:600 17px var(--sans); padding:6px 24px 6px 6px; border-radius:999px; cursor:pointer; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+  .tikla:active { transform:scale(.97); }
+  .tikla video { width:56px; height:56px; border-radius:50%; object-fit:cover; box-shadow:0 0 0 2px rgba(255,255,255,.7); }
+  @media (min-width:768px) {
+    #karsilama { padding:22vh 5vw 14vh; }
+    #karsilama::before { background:linear-gradient(to right,rgba(22,12,5,.78) 0%,rgba(22,12,5,.45) 38%,rgba(22,12,5,0) 60%),linear-gradient(to top,rgba(22,12,5,.55) 0%,rgba(22,12,5,0) 35%); }
+    h1.baslik { font-size:76px; } #karsilama p { font-size:19px; }
+  }
+
+  /* 2 · Hikâye videosu: son karede zarf tıklanır */
+  #hikaye { position:fixed; inset:0; background:#000; display:flex; align-items:center; justify-content:center; }
+  .sahne { position:relative; width:min(100vw, 100dvh * 16 / 9); aspect-ratio:16/9; }
+  .sahne video { width:100%; height:100%; display:block; }
+  /* Son karedeki zarf: 1280x720'de ~ (300,270)-(1020,590) */
+  #zarfAc { position:absolute; left:23%; top:36%; width:57%; height:47%; border:0; padding:0; background:none; cursor:pointer; border-radius:2%;
+            opacity:0; pointer-events:none; transition:opacity .6s; }
+  #zarfAc.hazir { opacity:1; pointer-events:auto; animation:parla 1.8s ease-in-out infinite; }
+  @keyframes parla { 0%,100% { box-shadow:0 0 0 0 rgba(255,140,60,0), inset 0 0 0 0 rgba(255,255,255,0); }
+                     50% { box-shadow:0 0 50px 8px rgba(255,140,60,.55), inset 0 0 40px rgba(255,255,255,.18); } }
+  #zarfAc span { position:absolute; left:50%; bottom:-14%; transform:translateX(-50%); white-space:nowrap; background:var(--yga-parlak); color:#fff;
+                 font:600 clamp(14px,1.6vw,19px) var(--sans); padding:.6em 1.3em; border-radius:999px; box-shadow:0 8px 30px rgba(255,90,18,.45); }
+  .sesAc { position:absolute; bottom:max(24px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); border:0; border-radius:999px;
+           background:rgba(255,255,255,.2); color:#fff; font:500 15px var(--sans); padding:12px 20px; backdrop-filter:blur(12px); cursor:pointer; }
+  .oynat { position:absolute; width:80px; height:80px; border-radius:50%; border:0; background:rgba(255,255,255,.2); color:#fff; font-size:30px; cursor:pointer; }
+
+  /* 3 · Mektup */
+  #mektup { position:relative; isolation:isolate; min-height:100dvh; padding:48px 16px max(64px,env(safe-area-inset-bottom)); }
+  #mektup > img.zemin { position:fixed; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; transform:scale(1.1); filter:blur(24px) brightness(.38); }
+  #mektup::before { content:""; position:fixed; inset:0; z-index:-1; background:radial-gradient(ellipse at top,rgba(242,107,29,.2),transparent 60%); }
+  @keyframes kagitCik { from { opacity:0; transform:translateY(60px) scale(.96) rotate(-1deg); } to { opacity:1; transform:none; } }
+  .kagit { max-width:760px; margin:0 auto; background:var(--kagit); color:var(--murekkep); border-radius:6px; padding:48px 28px 40px;
+           box-shadow:0 30px 80px rgba(0,0,0,.55); animation:kagitCik 1s cubic-bezier(.2,.8,.2,1) both;
+           background-image:linear-gradient(rgba(242,107,29,.05) 1px,transparent 1px); background-size:100% 2.05em; }
+  .logo { display:flex; justify-content:flex-end; align-items:center; gap:10px; font:13px Montserrat,sans-serif; }
+  .logo b { font-weight:800; color:var(--yga); } .logo i { width:2px; height:18px; background:var(--yga); }
+  .kagit h2 { font:700 44px/1 var(--el); margin:28px 0 36px; display:inline-block; transform:rotate(-2deg); position:relative; }
+  .kagit h2 .cizgi { left:4%; width:96%; bottom:-14px; }
+  .kagit p { font:400 18px/1.75 Lora,Georgia,serif; margin:0 0 1.1em; }
+  .kagit p.vurgu { font:700 30px/1.2 var(--el); color:var(--yga); margin-top:1.4em; }
+  figure { margin:28px -12px 30px; }
+  figure button { display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; }
+  figure img { display:block; width:100%; border-radius:6px; box-shadow:0 12px 34px rgba(60,30,10,.28); }
+  figcaption { font:600 22px var(--el); color:#8a6a55; text-align:center; margin-top:8px; }
+  .davet { border-left:3px solid var(--yga); padding:6px 0 6px 18px; margin:1.6em 0; }
+  .davet p { margin:.2em 0; } .davet b { font-weight:500; color:var(--yga); }
+  .not { font-size:15.5px !important; line-height:1.6 !important; color:#5d4c40; border-top:1px dashed #d8c8b5; padding-top:1.2em; margin-top:2em !important; }
+  .imza { display:flex; align-items:center; gap:12px; margin-top:28px; font:22px Montserrat,sans-serif; }
+  .imza b { font-weight:800; color:var(--yga); } .imza i { width:2px; height:24px; background:#c9b8a6; }
+  .indir { display:flex; align-items:center; justify-content:center; gap:12px; max-width:760px; margin:28px auto 0; height:58px; border-radius:999px;
+           border:1px solid rgba(255,255,255,.7); background:var(--yga-parlak); color:#fff; text-decoration:none; font:600 17px var(--sans);
+           box-shadow:0 8px 30px rgba(255,90,18,.35); }
+  .tekrar { display:block; margin:18px auto 0; background:none; border:0; color:rgba(255,255,255,.65); text-decoration:underline; font:14px var(--sans); cursor:pointer; }
+  @media (min-width:768px) { .kagit { padding:64px 72px 56px; } .kagit h2 { font-size:58px; } .kagit p { font-size:19.5px; } figure { margin:36px -36px 40px; } }
+
+  /* Görseli büyüt */
+  #buyuk { position:fixed; inset:0; z-index:60; background:rgba(10,6,3,.94); display:flex; align-items:center; justify-content:center; padding:12px; cursor:zoom-out; }
+  #buyuk img { max-width:100%; max-height:100%; border-radius:6px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · Karşılama -->
+<main id="karsilama">
+  <img src="karsilama.jpg" alt="" fetchpriority="high">
+  <section class="belir">
+    <h1 class="baslik">
+      <span>Sana özel</span><br>
+      <span>bir mesajımız var.<svg class="cizgi" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 110 6, 260 2, 396 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></span>
+    </h1>
+    <p>YGA'da başlayan bir yolculuk, hâlâ birçok hayatın parçası.</p>
+  </section>
+  <section class="belir" style="animation-delay:.35s">
+    <button class="tikla" id="tikla" type="button">
+      <video src="guvercin.mp4" poster="guvercin.jpg" autoplay loop muted playsinline aria-hidden="true"></video>
+      Tıkla
+    </button>
+  </section>
+</main>
+
+<!-- 2 · Hikâye: güvercin zarfı masaya bırakır -->
+<div id="hikaye" class="gizli">
+  <div class="sahne">
+    <video id="video" src="hikaye.mp4" poster="hikaye-kapak.jpg" playsinline preload="auto"></video>
+    <button id="zarfAc" type="button" aria-label="Zarfı aç, mektubu oku"><span>Zarfı aç ✉</span></button>
+  </div>
+  <button id="sesAc" class="sesAc gizli" type="button">🔊 Sesi aç</button>
+  <button id="oynat" class="oynat gizli" type="button" aria-label="Oynat">▶</button>
+</div>
+
+<!-- 3 · Mektup -->
+<main id="mektup" class="gizli">
+  <img class="zemin" src="karsilama.jpg" alt="">
+  <article class="kagit">
+    <div class="logo"><b>YGA</b><i></i><span>Alumni</span></div>
+    <h2>Biz'den Biz'e bir mektup,<svg class="cizgi" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 110 6, 260 2, 396 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></h2>
+
+    <p>Özledik, özleştik. Özümüze, eski güzel YGA günlerimize tekrar dönmeyi; bu içten bağı tekrar hissetmeyi hayal ettik.</p>
+
+    <p>Bu mektubu yazarken, hep birlikte olduğumuz eski bir günü düşündük: Üzerimizde YGA tişörtleri, herkesin yüzünde aynı içten gülüş. Seanslar, seans aralarında içi kıpır kıpır onlarca YGA'lı. Yan yana, gözleriyle gülüyor birbirlerine. Hepimizin yaşadığı güzel, içten, özden anlar.</p>
+
+    <p>Hâlâ sakladığımız YGA not defterleri, ya da gönlümüze işlediğimiz YGA kavramları. Sandıkları karıştırsak bulacağımız YGA tişörtleri... Hayatımızın birçok alanında bizimle yaşamaya devam eden, bazen sesli bazen sessizce kullandığımız, parçamız haline gelmiş öğretiler.</p>
+
+    <figure>
+      <button type="button" id="gorselBtn" aria-label="Görseli büyüt"><img src="kavramlar.jpg" alt="YGA kavramlarının yazılı olduğu notlar ve YGA fotoğraflarıyla dolu bir pano" loading="lazy"></button>
+      <figcaption>Hâlâ dilimizde olanlar</figcaption>
+    </figure>
+
+    <p>YGA'da farklı projelerde, farklı zamanlarda sorumluluklar aldık. Birlikte başardığımız her şey; sonraki dönemlerde de kat üstüne katlar çıkılarak büyümeye devam etti, belki farklı dönemlerde birbirimizi hiç tanımadan aynı fikirlere değer kattık, büyük bir yolculuğun parçası haline geldik.</p>
+
+    <p>Sevgide ayrılık da var, uzak düşmek de. Yemen'de olup, gönlün hep bir parça yanında kalmak da.</p>
+
+    <p class="vurgu">Ve şimdi…</p>
+
+    <p>Yeniden bir araya geliyoruz. Reconnect with YGA yolculuğumuzu; İstanbul ve Londra'da fiziki + online katılımlı bir toplantıyla başlatıyoruz.</p>
+
+    <div class="davet">
+      <p><b>Yer:</b> …</p>
+      <p><b>Saat:</b> …</p>
+    </div>
+
+    <p class="not"><b>Not:</b> Yıllar içinde artık ulaşamadığımız eski mezunlarımız da olduğunu biliyoruz. Sizden ricamız bu daveti tanıdığınız ve mesajın gitmediğini öğrendiğiniz YGA'lılara da ulaştırmanız.</p>
+
+    <div class="imza"><b>YGA</b><i></i><span>Alumni</span></div>
+  </article>
+
+  <a class="indir" href="mektup.pdf" download="YGA-Mektup.pdf">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 15v3a2 2 0 002 2h10a2 2 0 002-2v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Mektubunu indirmek için tıkla
+  </a>
+  <button class="tekrar" id="tekrar" type="button">Videoyu yeniden izle</button>
+</main>
+
+<div id="buyuk" class="gizli"><img src="kavramlar.jpg" alt=""></div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const video = $("video");
+  const goster = (id) => ["karsilama", "hikaye", "mektup"].forEach((k) => $(k).classList.toggle("gizli", k !== id));
+
+  function hikayeyiBaslat() {
+    goster("hikaye");
+    $("zarfAc").classList.remove("hazir");
+    video.currentTime = 0;
+    video.muted = false;
+    video.play().catch(() => {
+      video.muted = true; $("sesAc").classList.remove("gizli");
+      video.play().catch(() => $("oynat").classList.remove("gizli"));
+    });
+  }
+  $("tikla").onclick = hikayeyiBaslat;
+  $("sesAc").onclick = () => { video.muted = false; $("sesAc").classList.add("gizli"); video.play(); };
+  $("oynat").onclick = () => { $("oynat").classList.add("gizli"); video.muted = false; video.play(); };
+
+  // Son karede zarf masada kalır; üstü parlar, dokununca mektup açılır
+  video.addEventListener("ended", () => { $("sesAc").classList.add("gizli"); $("zarfAc").classList.add("hazir"); });
+  video.addEventListener("error", () => mektubuAc());
+  function mektubuAc() { video.pause(); goster("mektup"); window.scrollTo(0, 0); }
+  $("zarfAc").onclick = mektubuAc;
+  $("tekrar").onclick = hikayeyiBaslat;
+
+  $("gorselBtn").onclick = () => $("buyuk").classList.remove("gizli");
+  $("buyuk").onclick = () => $("buyuk").classList.add("gizli");
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("buyuk").classList.add("gizli"); });
+</script>
+</body>
+</html>
