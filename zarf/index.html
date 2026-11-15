@@ -96,6 +96,12 @@
   .kagit h1 { display:inline-block; position:relative; margin:0; font:700 42px/1 var(--el); transform:rotate(-2deg); }
   .kagit h1 .cizgi { left:8%; width:88%; bottom:-14px; }
   @media (min-width:768px) { .kagit h1 { font-size:52px; } }
+  .kartlar em { display:block; font:700 26px/1.15 var(--el); color:var(--murekkep); font-style:normal; padding:4px 0 10px; }
+  .kartlar { grid-template-columns:2.3fr 1fr; }
+  @media (max-width:420px) { .kartlar { grid-template-columns:1fr; } }
+  .kagit p.imza-alt { font:600 26px/1.1 var(--el); color:#8a6a55; margin:30px 0 0; }
+  .imza-alt + .imza { margin-top:10px; }
+  .simdi h3 { line-height:1.05 !important; }
   .davet { border-left:3px solid var(--yga); padding:6px 0 6px 18px; margin:1.6em 0; }
   .davet p { margin:.2em 0; } .davet b { font-weight:500; color:var(--yga); }
   .kagit p.not { font-style:italic; font-size:15.5px !important; line-height:1.6 !important; color:#7a6656; border-top:1px dashed #d8c8b5; padding-top:1.2em; margin-top:2em !important; }
@@ -148,32 +154,33 @@
   <article class="kagit">
     <div class="logo"><b>YGA</b><i></i><span>Alumni</span></div>
     <img class="kapak" src="../kapak.webp" width="1254" height="1254" alt="Turuncu YGA zarfı taşıyan beyaz güvercin, gün batımında Boğaz'ın üzerinde. Üzerinde YGA &amp; Reconnect yazıyor.">
-    <div class="ust"><h1>Turuncu Zarf<svg class="cizgi" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 110 6, 260 2, 396 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></h1><h2>Biz'den Biz'e bir mektup</h2></div>
+    <div class="ust"><h1>Turuncu Zarf<svg class="cizgi" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 110 6, 260 2, 396 8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></h1></div>
 
-    <p>Özledik, özleştik. Özümüze, eski güzel YGA günlerimize tekrar dönmeyi; bu içten bağı tekrar hissetmeyi hayal ettik.</p>
+    <p>Özledik, özleştik. Eski güzel YGA günlerine dönmeyi, o içten bağı yeniden hissetmeyi hayal ettik.</p>
 
-    <p>Bu mektubu yazarken, hep birlikte olduğumuz eski bir günü düşündük: Üzerimizde YGA tişörtleri, herkesin yüzünde aynı içten gülüş. Seanslar, seans aralarında içi kıpır kıpır onlarca YGA'lı. Yan yana, gözleriyle gülüyor birbirlerine. Hepimizin yaşadığı güzel, içten, özden anlar.</p>
+    <p>Bu mektubu yazarken hep birlikte olduğumuz günleri düşündük. Üzerimizde YGA tişörtleri, yüzümüzde aynı içten gülüşler... Seanslar, seans aralarında bitmeyen sohbetler, gözleriyle gülen insanlar. Hepimizin hafızasında yer eden o güzel anlar.</p>
 
-    <p>Hala sakladığımız YGA not defterleri, ya da gönlümüze işlediğimiz YGA kavramları. Sandıkları karıştırsak bulacağımız YGA tişörtleri... Hayatımızın birçok alanında bizimle yaşamaya devam eden, bazen sesli bazen sessizce kullandığımız, parçamız haline gelmiş öğretiler.</p>
+    <p>Hala sakladığımız YGA not defterleri, dilimizden düşmeyen kavramlar, sandıklarda bekleyen tişörtler... YGA'da öğrendiklerimiz, bugün de hayatımızın bir parçası.</p>
 
     <figure>
       <button type="button" id="gorselBtn" aria-label="Görseli büyüt"><img src="kavramlar.jpg" alt="YGA kavramlarının yazılı olduğu notlar ve YGA fotoğraflarıyla dolu bir pano" loading="lazy"></button>
       <figcaption>Hala dilimizde olanlar</figcaption>
     </figure>
 
-    <p>YGA'da farklı projelerde, farklı zamanlarda sorumluluklar aldık. Birlikte başardığımız her şey; sonraki dönemlerde de kat üstüne katlar çıkılarak büyümeye devam etti, belki farklı dönemlerde birbirimizi hiç tanımadan aynı fikirlere değer kattık, büyük bir yolculuğun parçası haline geldik.</p>
+    <p>Farklı zamanlarda, farklı projelerde birlikte sorumluluklar aldık. Birlikte başardıklarımız, bizden sonraki dönemlerde büyüyerek devam etti. Belki birbirimizi hiç tanımadık ama aynı büyük yolculuğun parçası olduk.</p>
 
     <p>Sevgide ayrılık da var, uzak düşmek de. Yemen'de olup, gönülden hep bir parça yanında kalmak da.</p>
 
     <section class="simdi">
-      <h3>Ve şimdi...</h3>
-      <p>Yeniden bir araya geliyoruz. <b>Reconnect with YGA</b> yolculuğumuzu; İstanbul ve Londra'da fiziki + online katılımlı bir toplantıyla başlatıyoruz.</p>
+      <h3>Ve şimdi yeniden bir araya geliyoruz!</h3>
+      <p><b>Reconnect with YGA</b> yolculuğumuzu İstanbul ve Londra'da fiziki, online katılımla gerçekleştireceğimiz bir buluşmayla başlatıyoruz.</p>
       <div class="sehirler"><span>İstanbul</span><span>Londra</span><span class="koyu">Online</span></div>
-      <div class="kartlar"><div><small>YER</small><em></em></div><div><small>SAAT</small><em></em></div></div>
+      <div class="kartlar"><div><small>YER</small><em>Levent Avantgarde Otel Toplantı Salonu</em></div><div><small>SAAT</small><em>19:00</em></div></div>
     </section>
 
-    <p class="not"><b>Not:</b> Yıllar içinde artık ulaşamadığımız eski mezunlarımız da olduğunu biliyoruz. Sizden ricamız bu daveti tanıdığınız ve mesajın gitmediğini öğrendiğiniz YGA'lılara da ulaştırmanız.</p>
+    <p class="not"><b>Not:</b> Yıllar içinde ulaşamadığımız mezunlarımız olduğunu biliyoruz. Bu daveti, mesajın ulaşmadığını düşündüğünüz YGA'lı dostlarımıza da iletmenizi rica ediyoruz.</p>
 
+    <p class="imza-alt">Biz'den Biz'e bir mektup</p>
     <div class="imza"><b>YGA</b><i></i><span>Alumni</span></div>
   </article>
 
