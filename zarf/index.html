@@ -180,7 +180,7 @@
 
     <p>Sevgide ayrılık da var, uzak düşmek de. Yemen'de olup, gönülden hep bir parça yanında kalmak da.</p>
 
-    <section class="simdi">
+    <section class="simdi" id="bulusma">
       <h3>Ve şimdi yeniden bir araya geliyoruz!</h3>
       <p><b>Reconnect with YGA</b> yolculuğumuzu İstanbul ve Londra'da fiziki, online katılımla gerçekleştireceğimiz bir buluşmayla başlatıyoruz.</p>
       <div class="sehirler" role="tablist" aria-label="Buluşma yeri">
@@ -253,6 +253,8 @@
       });
     };
   });
+  // PDF'teki "Buluşma davetiyesi" düğmesi #bulusma ile gelir: doğrudan mektubu aç, buluşma bölümüne in
+  if (location.hash === "#bulusma") { goster("mektup"); setTimeout(() => $("bulusma").scrollIntoView({ block: "start" }), 50); }
   $("gorselBtn").onclick = () => $("buyuk").classList.remove("gizli");
   $("buyuk").onclick = () => $("buyuk").classList.add("gizli");
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("buyuk").classList.add("gizli"); });
