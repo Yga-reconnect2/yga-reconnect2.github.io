@@ -42,6 +42,10 @@
     h1.baslik { font-size:76px; } #karsilama p { font-size:19px; }
   }
 
+  .ses-secim { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+  .ses-secim button { border:1px solid rgba(255,255,255,.45); background:rgba(0,0,0,.25); color:rgba(255,255,255,.85); font:500 14px var(--sans);
+                      padding:8px 14px; border-radius:999px; cursor:pointer; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+  .ses-secim button[aria-checked="true"] { background:#fff; color:var(--koyu); border-color:#fff; font-weight:600; }
   /* 2 · Hikâye videosu: son karede zarf tıklanır */
   #hikaye { position:fixed; inset:0; background:#000; display:flex; align-items:center; justify-content:center; }
   .sahne { position:relative; width:min(100vw, 100dvh * 16 / 9); aspect-ratio:16/9; }
@@ -145,6 +149,10 @@
       <video src="guvercin.mp4" poster="guvercin.jpg" autoplay loop muted playsinline aria-hidden="true"></video>
       Tıkla
     </button>
+    <div class="ses-secim" role="radiogroup" aria-label="Video sesi">
+      <button type="button" role="radio" aria-checked="true" data-src="hikaye.mp4">🎙 Sesli anlatımla</button>
+      <button type="button" role="radio" aria-checked="false" data-src="hikaye-muzik.mp4">🎵 Yalnızca müzikle</button>
+    </div>
   </section>
 </main>
 
@@ -231,6 +239,13 @@
     });
   }
   $("tikla").onclick = hikayeyiBaslat;
+  // Ses seçimi: sesli anlatım (varsayılan) ya da yalnızca müzik
+  document.querySelectorAll('.ses-secim button').forEach((b) => {
+    b.onclick = () => {
+      document.querySelectorAll('.ses-secim button').forEach((o) => o.setAttribute("aria-checked", o === b));
+      if (!video.src.endsWith(b.dataset.src)) { video.src = b.dataset.src; video.load(); }
+    };
+  });
   $("sesAc").onclick = () => { video.muted = false; $("sesAc").classList.add("gizli"); video.play(); };
   $("oynat").onclick = () => { $("oynat").classList.add("gizli"); video.muted = false; video.play(); };
 
