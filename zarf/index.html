@@ -155,7 +155,7 @@
     <p>YGA'da başlayan bir yolculuk, hala birçok hayatın parçası.</p>
   </section>
   <section class="belir" style="animation-delay:.35s">
-    <button class="tikla" id="tikla" type="button">
+    <button class="tikla" id="tikla" type="button" aria-label="Tıkla, sana özel mesajı aç">
       <video src="guvercin.mp4" poster="guvercin.jpg" autoplay loop muted playsinline aria-hidden="true"></video>
       Tıkla
     </button>
@@ -163,11 +163,11 @@
 </main>
 
 <!-- 1b · Nasıl izlemek istersin? -->
-<div id="secim" class="gizli" role="dialog" aria-labelledby="secimBaslik">
+<div id="secim" class="gizli" role="dialog" aria-modal="true" aria-labelledby="secimBaslik">
   <div class="secim-kutu">
     <h2 id="secimBaslik">Nasıl izlemek istersin?</h2>
-    <button type="button" class="secim-dugme" data-src="hikaye.mp4">🎙<span><b>Sesli anlatımla</b><small>Bir anlatıcı hikâyeyi anlatıyor</small></span></button>
-    <button type="button" class="secim-dugme" data-src="hikaye-muzik.mp4">🎵<span><b>Yalnızca müzikle</b><small>Sadece müzik ve görüntü</small></span></button>
+    <button type="button" class="secim-dugme" data-src="hikaye.mp4" aria-label="Sesli anlatımla izle. Bir anlatıcı videoda olanları anlatıyor. Görme engelli kullanıcılar için önerilir."><span aria-hidden="true">🎙</span><span><b>Sesli anlatımla</b><small>Bir anlatıcı hikâyeyi anlatıyor</small></span></button>
+    <button type="button" class="secim-dugme" data-src="hikaye-muzik.mp4" aria-label="Yalnızca müzikle izle. Anlatım yok, sadece müzik ve görüntü."><span aria-hidden="true">🎵</span><span><b>Yalnızca müzikle</b><small>Sadece müzik ve görüntü</small></span></button>
   </div>
 </div>
 
@@ -254,7 +254,8 @@
     });
   }
   // "Tıkla" önce seçimi gösterir: sesli anlatım ya da yalnızca müzik
-  $("tikla").onclick = () => $("secim").classList.remove("gizli");
+  $("tikla").onclick = () => { $("secim").classList.remove("gizli"); setTimeout(() => document.querySelector(".secim-dugme").focus(), 50); };
+  $("secim").addEventListener("keydown", (e) => { if (e.key === "Escape") { $("secim").classList.add("gizli"); $("tikla").focus(); } });
   document.querySelectorAll('.secim-dugme').forEach((b) => {
     b.onclick = () => {
       if (!video.src.endsWith(b.dataset.src)) { video.src = b.dataset.src; video.load(); }
