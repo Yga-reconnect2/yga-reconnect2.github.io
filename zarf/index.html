@@ -126,6 +126,14 @@
   .logo img.yga { height:17px; width:auto; display:block; }
   .imza img.yga { height:24px; width:auto; display:block; }
   .kagit .kapak { margin-bottom:34px; }
+  .betim { margin:10px 12px 0; font:15px/1.55 var(--sans); color:#5a4234; }
+  .betim summary { cursor:pointer; color:var(--yga); font-weight:600; text-align:center; list-style:none; }
+  .betim summary::before { content:"♿ "; } .betim summary::-webkit-details-marker { display:none; }
+  .betim summary:focus-visible { outline:3px solid var(--yga); outline-offset:3px; border-radius:6px; }
+  .betim > div { margin-top:10px; padding:14px 16px; background:#fff6ec; border-radius:10px; }
+  .kagit .betim p { font:15px/1.55 var(--sans); margin:0 0 8px; }
+  .betim ul { margin:0; padding-left:20px; columns:2; column-gap:22px; } .betim li { margin:0 0 4px; break-inside:avoid; }
+  @media (max-width:520px) { .betim ul { columns:1; } }
   .davet { border-left:3px solid var(--yga); padding:6px 0 6px 18px; margin:1.6em 0; }
   .davet p { margin:.2em 0; } .davet b { font-weight:500; color:var(--yga); }
   .kagit p.not { font-weight:700; color:var(--yga) !important; font-style:italic; font-size:15.5px !important; line-height:1.6 !important; color:#7a6656; border-top:1px dashed #d8c8b5; padding-top:1.2em; margin-top:2em !important; }
@@ -195,8 +203,27 @@
     <p>Hala sakladığımız YGA not defterleri, dilimizden düşmeyen kavramlar, sandıklarda bekleyen tişörtler... YGA'da öğrendiklerimiz, bugün de hayatımızın bir parçası.</p>
 
     <figure>
-      <button type="button" id="gorselBtn" aria-label="Görseli büyüt"><img src="kavramlar.jpg" alt="YGA kavramlarının yazılı olduğu notlar ve YGA fotoğraflarıyla dolu bir pano" loading="lazy"></button>
+      <button type="button" id="gorselBtn" aria-label="Görseli büyüt"><img src="kavramlar.jpg" alt="Sizden Gelenler panosu: mantar panoya iğnelenmiş, YGA kavramlarının el yazısıyla yazıldığı notlar ve YGA fotoğrafları. Ayrıntılı betimleme görselin altında." aria-describedby="panoBetim" loading="lazy"></button>
       <figcaption>Sizden gelenler, hala dilimizde olanlar</figcaption>
+      <details class="betim">
+        <summary>Görselin betimlemesi</summary>
+        <div id="panoBetim">
+          <p>Gün ışığının yaprak gölgeleriyle düştüğü bir mantar panoda, ortada YGA | Alumni logosu var. En üstte "Sizden Gelenler" başlığı yazıyor. Etrafına raptiyelerle onlarca sarı not kâğıdı ve beş fotoğraf iğnelenmiş. Fotoğraflarda gün batımında turuncu YGA tişörtlü gençler, masa başında birlikte çalışan YGA'lılar, dağ tepesinde siluetler, sarılan iki arkadaş ve kamp ateşinin etrafında toplanmış bir grup görünüyor.</p>
+          <p>Notlarda yazan kavramlar:</p>
+          <ul>
+            <li>HZR</li><li>Elleri hızlı, kalbi yumuşak, zihni berrak</li><li>Selfless Leader</li><li>Kalp değişmeden kalıp değişmez</li>
+            <li>3E: Engagement, Envision, Empowerment</li><li>What, So What, Now</li><li>Feedforward</li><li>Fail Forward</li>
+            <li>Egosu küçük, kalbi büyük, kanatları hızlı</li><li>Çift kanatlı liderlik</li><li>Öncesi, Sırası, Sonrası</li><li>Kat üstüne kat çıkmak</li>
+            <li>Birlikte başarmak</li><li>Egosu küçük, kalbi büyük liderler</li><li>Hayal ortağı</li><li>Hayal ortaklığı</li>
+            <li>Bizim siyah gördüğümüz kuşların birbirlerini rengârenk görmesi</li><li>Birlikte başarmayı başarmak</li>
+            <li>Kendini bil</li><li>Kendine yolculuk</li><li>Kendine liderlik</li><li>Bensiz lider</li><li>Bensizlik</li><li>İçten liderlik</li>
+            <li>Samimi takdir</li><li>Bilselerdi yapmazlardı</li><li>Stop, Start, Continue</li><li>Structured Discovery (Controlling &amp; Spontaneous)</li>
+            <li>Feedforwardable bakış</li><li>W3D</li><li>Innergize</li><li>MTTR</li>
+            <li>Kendini bil, ne varlığa sevinirim ne yokluğa yerinirim</li><li>Başarıda kibre, başarısızlıkta endişe tuzağına düşmemek</li>
+            <li>Anlam arayışı, faydalı olmak, fayda yaratmak</li><li>No Nature, No Future</li><li>Competent Jerks vs Lovable Fools</li>
+          </ul>
+        </div>
+      </details>
     </figure>
 
     <p>Farklı zamanlarda, farklı projelerde birlikte sorumluluklar aldık. Birlikte başardıklarımız, bizden sonraki dönemlerde büyüyerek devam etti. Belki birbirimizi hiç tanımadık ama aynı büyük yolculuğun parçası olduk.</p>
