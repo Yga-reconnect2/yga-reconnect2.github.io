@@ -84,10 +84,16 @@
   .simdi h3 { margin:0 0 12px; font:700 44px/1 var(--el); color:var(--yga); }
   .simdi p { margin:0; }
   .sehirler { display:flex; gap:3px; margin-top:20px; }
-  .sehirler span { font:700 24px/1 var(--el); color:#fff; background:var(--yga); padding:6px 18px 9px; }
-  .sehirler span:first-child { border-radius:999px 0 0 999px; } .sehirler span:last-child { border-radius:0 999px 999px 0; }
-  .sehirler .koyu { background:var(--koyu); }
-  @media (max-width:420px) { .sehirler span { font-size:20px; padding:5px 12px 8px; } .simdi { padding:22px 16px 20px; } }
+  .sehirler button { font:700 24px/1 var(--el); color:#fff; background:var(--yga); padding:6px 18px 9px; border:0; cursor:pointer; transition:background .2s; }
+  .sehirler button:first-child { border-radius:999px 0 0 999px; } .sehirler button:last-child { border-radius:0 999px 999px 0; }
+  .sehirler button[aria-selected="true"] { background:var(--koyu); }
+  .sehirler button:focus-visible { outline:3px solid var(--yga); outline-offset:2px; }
+  @media (max-width:420px) { .sehirler button { font-size:20px; padding:5px 12px 8px; } .simdi { padding:22px 16px 20px; } }
+  .kartlar.tek { grid-template-columns:1fr !important; margin-top:14px; }
+  .katilim { display:flex; align-items:center; justify-content:center; margin-top:18px; height:54px; border-radius:999px; background:var(--yga-parlak);
+             color:#fff; font:600 17px var(--sans); text-decoration:none; box-shadow:0 8px 24px rgba(255,90,18,.3); }
+  .katilim:active { transform:scale(.98); }
+  .simdi p.kontenjan { margin-top:12px; font-size:14px !important; line-height:1.5; font-style:italic; color:#7a6656; }
   .kartlar { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px; }
   .kartlar div { background:#fff; border-radius:10px; padding:10px 16px 0; min-height:62px; border-bottom:2px solid #ecdccb; }
   .kartlar small { font:800 11px Montserrat,sans-serif; letter-spacing:.06em; color:var(--yga); }
@@ -177,8 +183,21 @@
     <section class="simdi">
       <h3>Ve şimdi yeniden bir araya geliyoruz!</h3>
       <p><b>Reconnect with YGA</b> yolculuğumuzu İstanbul ve Londra'da fiziki, online katılımla gerçekleştireceğimiz bir buluşmayla başlatıyoruz.</p>
-      <div class="sehirler"><span>İstanbul</span><span>Londra</span><span class="koyu">Online</span></div>
-      <div class="kartlar"><div><small>YER</small><em>Levent Avantgarde Otel Toplantı Salonu</em></div><div><small>SAAT</small><em>19:00</em></div></div>
+      <div class="sehirler" role="tablist" aria-label="Buluşma yeri">
+        <button type="button" role="tab" id="t-ist" aria-selected="true" aria-controls="p-ist">İstanbul</button><button type="button" role="tab" id="t-lon" aria-selected="false" aria-controls="p-lon">Londra</button><button type="button" role="tab" id="t-onl" aria-selected="false" aria-controls="p-onl">Online</button>
+      </div>
+      <div class="sekme" id="p-ist" role="tabpanel" aria-labelledby="t-ist">
+        <div class="kartlar"><div><small>YER</small><em>Levent Avantgarde Otel Toplantı Salonu</em></div><div><small>SAAT</small><em>19.00-21.00</em></div></div>
+        <div class="kartlar tek"><div><small>TARİH</small><em>30.11.2026</em></div></div>
+        <a class="katilim" href="https://forms.gle/rJznq7h8mX8a3MjB9" target="_blank" rel="noopener">İstanbul Toplantı Katılım →</a>
+        <p class="kontenjan">*Sınırlı kontenjan sebebiyle fiziki etkinlik için katılım formu dolduran ve katılacağını teyit eden ilk 90 kişi ile sınırlıdır.</p>
+      </div>
+      <div class="sekme" id="p-lon" role="tabpanel" aria-labelledby="t-lon" hidden>
+        <div class="kartlar tek"><div><small>TARİH</small><em>6-8 Aralık</em></div></div>
+      </div>
+      <div class="sekme" id="p-onl" role="tabpanel" aria-labelledby="t-onl" hidden>
+        <div class="kartlar tek"><div><small>TARİH</small><em>8-14 Aralık</em></div></div>
+      </div>
     </section>
 
     <p class="not"><b>Not:</b> Yıllar içinde ulaşamadığımız mezunlarımız olduğunu biliyoruz. Bu daveti, mesajın ulaşmadığını düşündüğünüz YGA'lı dostlarımıza da iletmenizi rica ediyoruz.</p>
@@ -225,6 +244,15 @@
   $("zarfAc").onclick = mektubuAc;
   $("tekrar").onclick = hikayeyiBaslat;
 
+  // Buluşma sekmeleri: İstanbul / Londra / Online (seçili olan koyu)
+  document.querySelectorAll('.sehirler [role="tab"]').forEach((t) => {
+    t.onclick = () => {
+      document.querySelectorAll('.sehirler [role="tab"]').forEach((o) => {
+        const sec = o === t; o.setAttribute("aria-selected", sec);
+        document.getElementById(o.getAttribute("aria-controls")).hidden = !sec;
+      });
+    };
+  });
   $("gorselBtn").onclick = () => $("buyuk").classList.remove("gizli");
   $("buyuk").onclick = () => $("buyuk").classList.add("gizli");
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("buyuk").classList.add("gizli"); });
