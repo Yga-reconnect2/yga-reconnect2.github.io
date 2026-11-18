@@ -49,7 +49,8 @@
   /* Son karedeki zarf: 1280x720'de ~ (300,270)-(1020,590) */
   #zarfAc { position:absolute; left:23%; top:36%; width:57%; height:47%; border:0; padding:0; background:none; cursor:pointer; border-radius:2%;
             opacity:0; pointer-events:none; transition:opacity .6s; }
-  #zarfAc.hazir { opacity:1; pointer-events:auto; animation:parla 1.8s ease-in-out infinite; }
+  #zarfAc.hazir { opacity:1; pointer-events:auto; }
+  #zarfAc.bitti { animation:parla 1.8s ease-in-out infinite; }   /* parlama yalnız son karede: kutu zarfla örtüşür */
   @keyframes parla { 0%,100% { box-shadow:0 0 0 0 rgba(255,140,60,0), inset 0 0 0 0 rgba(255,255,255,0); }
                      50% { box-shadow:0 0 50px 8px rgba(255,140,60,.55), inset 0 0 40px rgba(255,255,255,.18); } }
   #zarfAc span { position:absolute; left:50%; bottom:-14%; transform:translateX(-50%); white-space:nowrap; background:var(--yga-parlak); color:#fff;
@@ -202,7 +203,7 @@
 
   function hikayeyiBaslat() {
     goster("hikaye");
-    $("zarfAc").classList.remove("hazir");
+    $("zarfAc").classList.remove("hazir", "bitti");
     video.currentTime = 0;
     video.muted = false;
     video.play().catch(() => {
@@ -215,7 +216,10 @@
   $("oynat").onclick = () => { $("oynat").classList.add("gizli"); video.muted = false; video.play(); };
 
   // Son karede zarf masada kalır; üstü parlar, dokununca mektup açılır
-  video.addEventListener("ended", () => { $("sesAc").classList.add("gizli"); $("zarfAc").classList.add("hazir"); });
+  // "Bu mektup senin için." yazısı ~31. saniyede beliriyor: düğme de o an çıksın, video bitmesini bekleme
+  const DUGME_ANI = 31.2;
+  video.addEventListener("timeupdate", () => { if (video.currentTime >= DUGME_ANI) $("zarfAc").classList.add("hazir"); });
+  video.addEventListener("ended", () => { $("sesAc").classList.add("gizli"); $("zarfAc").classList.add("hazir", "bitti"); });
   video.addEventListener("error", () => mektubuAc());
   function mektubuAc() { video.pause(); goster("mektup"); window.scrollTo(0, 0); }
   $("zarfAc").onclick = mektubuAc;
