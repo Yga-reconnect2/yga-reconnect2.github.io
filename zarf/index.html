@@ -137,7 +137,14 @@
   .davet { border-left:3px solid var(--yga); padding:6px 0 6px 18px; margin:1.6em 0; }
   .davet p { margin:.2em 0; } .davet b { font-weight:500; color:var(--yga); }
   .kagit p.not { font-weight:700; color:var(--yga) !important; font-style:italic; font-size:15.5px !important; line-height:1.6 !important; color:#7a6656; border-top:1px dashed #d8c8b5; padding-top:1.2em; margin-top:2em !important; }
-  .imza { display:flex; align-items:center; gap:12px; margin-top:28px; font:22px Montserrat,sans-serif; }
+  /* YGA Alumni imzası: küçük YGA logosu üstte, altı çizili el yazısı "Alumni" */
+  .ya { display:inline-flex; flex-direction:column; align-items:center; line-height:1; }
+  .ya img { height:13px; width:auto; display:block; margin-bottom:1px; }
+  .ya span { font:700 34px/1 var(--el); color:var(--murekkep); padding:0 4px 9px; position:relative; }
+  .ya span::after { content:""; position:absolute; left:6%; right:0; bottom:2px; height:4px; border-radius:4px;
+                    background:var(--yga); transform:rotate(-3deg); transform-origin:right; }
+  .logo .ya img { height:10px; } .logo .ya span { font-size:25px; padding-bottom:7px; } .logo .ya span::after { height:3px; }
+  .imza { display:flex; margin-top:22px; }
   .imza b { font-weight:800; color:var(--yga); } .imza i { width:2px; height:24px; background:#c9b8a6; }
   .indir { display:flex; align-items:center; justify-content:center; gap:12px; max-width:760px; margin:28px auto 0; height:58px; border-radius:999px;
            border:1px solid rgba(255,255,255,.7); background:var(--yga-parlak); color:#fff; text-decoration:none; font:600 17px var(--sans);
@@ -193,7 +200,7 @@
 <main id="mektup" class="gizli">
   <img class="zemin" src="karsilama.jpg" alt="">
   <article class="kagit">
-    <div class="logo"><img class="yga" src="yga-logo.png" alt="YGA"><i></i><span>Alumni</span></div>
+    <div class="logo"><div class="ya" role="img" aria-label="YGA Alumni"><img src="yga-logo.png" alt=""><span>Alumni</span></div></div>
     <img class="kapak" src="kapak.jpg" width="1254" height="1254" alt="Turuncu YGA zarfı taşıyan beyaz güvercin, gün batımında Boğaz'ın üzerinde. Üzerinde YGA &amp; Reconnect yazıyor.">
 
     <p>Özledik, özleştik. Özümüze, eski güzel YGA günlerimize tekrar dönmeyi; bu içten bağı tekrar hissetmeyi hayal ettik.</p>
@@ -208,7 +215,7 @@
       <details class="betim">
         <summary>Görselin betimlemesi</summary>
         <div id="panoBetim">
-          <p>Gün ışığının yaprak gölgeleriyle düştüğü bir mantar panoda, ortada YGA | Alumni logosu var. En üstte "Sizden Gelenler" başlığı yazıyor. Etrafına raptiyelerle onlarca sarı not kâğıdı ve beş fotoğraf iğnelenmiş. Fotoğraflarda gün batımında turuncu YGA tişörtlü gençler, masa başında birlikte çalışan YGA'lılar, dağ tepesinde siluetler, sarılan iki arkadaş ve kamp ateşinin etrafında toplanmış bir grup görünüyor.</p>
+          <p>Gün ışığının yaprak gölgeleriyle düştüğü bir mantar panoda, ortada YGA Alumni logosu var. En üstte "Sizden Gelenler" başlığı yazıyor. Etrafına raptiyelerle onlarca sarı not kâğıdı ve beş fotoğraf iğnelenmiş. Fotoğraflarda gün batımında turuncu YGA tişörtlü gençler, masa başında birlikte çalışan YGA'lılar, dağ tepesinde siluetler, sarılan iki arkadaş ve kamp ateşinin etrafında toplanmış bir grup görünüyor.</p>
           <p>Notlarda yazan kavramlar:</p>
           <ul>
             <li>HZR</li><li>Elleri hızlı, kalbi yumuşak, zihni berrak</li><li>Selfless Leader</li><li>Kalp değişmeden kalıp değişmez</li>
@@ -238,7 +245,7 @@
       </div>
       <div class="sekme" id="p-ist" role="tabpanel" aria-labelledby="t-ist">
         <div class="kartlar"><div><small>YER</small><em>Levent Avantgarde Otel Toplantı Salonu</em></div><div><small>SAAT</small><em>19.00-21.00</em></div></div>
-        <div class="kartlar tek"><div><small>TARİH</small><em>30.11.2026</em></div></div>
+        <div class="kartlar tek"><div><small>TARİH</small><em>30 Kasım 2026</em></div></div>
         <a class="katilim" href="https://forms.gle/rJznq7h8mX8a3MjB9" target="_blank" rel="noopener">İstanbul Toplantı Katılım →</a>
         <p class="kontenjan">*Sınırlı kontenjan sebebiyle fiziki etkinlik için katılım formu dolduran ve katılacağını teyit eden ilk 90 kişi ile sınırlıdır.</p>
       </div>
@@ -246,14 +253,14 @@
         <div class="kartlar"><div><small>TARİH</small><em>6 Aralık</em></div><div><small>SAAT</small><em>13.00-16.00</em></div></div>
       </div>
       <div class="sekme" id="p-onl" role="tabpanel" aria-labelledby="t-onl" hidden>
-        <div class="kartlar"><div><small>TARİH</small><em>8-14 Aralık</em></div><div><small>SAAT</small><em>İletilecek</em></div></div>
+        <div class="kartlar"><div><small>TARİH</small><em>9 Aralık</em></div><div><small>SAAT</small><em>İletilecek</em></div></div>
       </div>
     </section>
 
     <p class="not"><b>Not:</b> Yıllar içinde ulaşamadığımız mezunlarımız olduğunu biliyoruz. Bu daveti, mesajın ulaşmadığını düşündüğünüz YGA'lı dostlarımıza da iletmenizi rica ediyoruz.</p>
 
     <p class="imza-alt">Biz'den Biz'e bir mektup</p>
-    <div class="imza"><img class="yga" src="yga-logo.png" alt="YGA"><i></i><span>Alumni</span></div>
+    <div class="imza"><div class="ya" role="img" aria-label="YGA Alumni"><img src="yga-logo.png" alt=""><span>Alumni</span></div></div>
   </article>
 
   <a class="indir" href="mektup.pdf" download="YGA-Mektup.pdf">
